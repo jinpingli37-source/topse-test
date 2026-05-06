@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+reports/
+logs/
+log/
+.claude/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
