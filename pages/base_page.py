@@ -28,6 +28,10 @@ class BasePage:
         self.page.locator(f"#{id_}").select_option(option)
         return self
 
+    def wait(self, ms):
+        self.page.wait_for_timeout(ms)
+        return self
+
     def select_tree_first_node(self):
         """打开部门/用户树下拉后，选第一个节点并关闭下拉"""
         self.page.locator(

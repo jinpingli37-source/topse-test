@@ -47,12 +47,11 @@ class YunweiFlow:
 
         self.devops.click_confirm()
 
-    def access_host(self):
+    def access_host(self, screenshot_path=None):
         self.devops.nav_to_hosts()
         self.devops.page.wait_for_timeout(3000)
-        self.devops.click_ssh().click_web_icon()
-
-        self.devops.page.screenshot(path="reports/picture/host_access.png")
+        self.devops.click_ssh()
+        self.devops.open_web_ssh(screenshot_path)
         self.devops.page.wait_for_timeout(50000)
 
     def run_full_flow(self, asset, account, auth):

@@ -1,4 +1,9 @@
+import os
+
 from pages.base_page import BasePage
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class DevopsPage(BasePage):
@@ -31,7 +36,9 @@ class DevopsPage(BasePage):
         return self.click_text("账号配置")
 
     def click_new_account(self):
-        self.page.locator("#accForm").get_by_title("新建").click()
+        btn = self.page.locator("#accForm").get_by_title("新建")
+        btn.wait_for(state="visible", timeout=10000)
+        btn.click()
         return self
 
     def fill_account_form(self, protocol, name, password):
@@ -84,6 +91,18 @@ class DevopsPage(BasePage):
     def click_ssh(self):
         return self.click_text("SSH")
 
-    def click_web_icon(self):
-        self.page.get_by_title("WEB").get_by_role("img").click()
-        return self
+    def open_web_ssh(self, screenshot_path: str | None = None):
+        """点击 WEB 按钮，返回弹出的运维窗口。如果提供 screenshot_path 则等待 12s 后截取左上 1/4 区域。"""
+        logger.info("点击 WEB 运维")
+        with self.page.expect_popup() as popup_info:
+            self.page.get_by_title("WEB").get_by_role("img").click()
+        popup = popup_info.value
+        popup.wait_for_load_state("networkidle")
+        self.wait(2000)
+        logger.info(f"Web SSH 运维弹窗: {popup.url}")
+        if screenshot_path:
+            self.wait(12000)
+            os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
+            popup.screenshot(path=screenshot_path, clip={"x": 0, "y": 0, "width": 960, "height": 540})
+            logger.info(f"运维截图已保存: {screenshot_path}")
+        return popup
