@@ -54,7 +54,7 @@ class YunweiFlow:
         self.devops.open_web_ssh(screenshot_path)
         self.devops.page.wait_for_timeout(50000)
 
-    def run_full_flow(self, asset, account, auth):
+    def run_full_flow(self, asset, account, auth, screenshot_path=None):
         self.create_asset_with_account(asset, account)
         self.add_authorization(auth)
-        self.access_host()
+        self.access_host(screenshot_path)

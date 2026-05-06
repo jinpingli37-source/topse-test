@@ -1,0 +1,7 @@
+ flows/yunwei_flow.py |  7 [32m+++[m[31m----[m
+ pages/base_page.py   |  4 [32m++++[m
+ pages/devops_page.py | 27 [32m++++++++++++++++++++[m[31m----[m
+ requirements.txt     |  1 [32m+[m
+ utils/compare.py     | 59 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ utils/logger.py      | 27 [32m++++++++++++++++++++++++[m
+ 6 files changed, 117 insertions(+), 8 deletions(-)
