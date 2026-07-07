@@ -8,13 +8,14 @@ pipeline {
     }
 
     stages {
-        // Setup 阶段仅在 requirements.txt 变更或新增依赖时取消注释
-        // stage('Setup') {
-        //     steps {
-        //         sh 'python3 -m pip install -r requirements.txt'
-        //         sh 'python3 -m playwright install chromium'
-        //     }
-        // }
+        stage('Setup') {
+            steps {
+                echo '安装 Python 依赖...'
+                sh 'python3 -m pip install -r requirements.txt'
+                echo '安装 Playwright 浏览器...'
+                sh 'python3 -m playwright install chromium'
+            }
+        }
 
         stage('Test') {
             steps {
