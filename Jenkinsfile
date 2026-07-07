@@ -25,6 +25,7 @@ pipeline {
             post {
                 always {
                     junit 'reports/junit.xml'
+                    allure includeProperties: false, results: [[path: 'reports/allure-results']]
                     archiveArtifacts artifacts: 'reports/screenshots/**,logs/**.log'
                 }
             }
