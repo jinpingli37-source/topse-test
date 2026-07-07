@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture(scope="session")
 def base_url():
-    return "https://192.168.3.56"
+    return "https://10.5.5.5"
 
 
 @pytest.fixture(scope="session")
